@@ -1,0 +1,25 @@
+{{.Value.FileComment}}package main
+
+import (
+    "github.com/gin-gonic/gin"
+    "github.com/xfali/go-web-starter/config"
+    "github.com/xfali/go-web-starter/datasource"
+    "github.com/xfali/go-web-starter/web"
+    "github.com/xfali/gobatis/factory"
+    "github.com/xfali/pagehelper"
+    "{{.Value.Module}}/internal/pkg/{{.Value.PrivatePkg}}"
+    "{{.Value.Module}}/pkg/midware"
+)
+
+func main() {
+    web.SetFactoryBuilder(func(source *config.DataSource) (factory factory.Factory, e error) {
+        fac, err := datasource.DefaultBuilder(source)
+        return pagehelper.New(fac), err
+    })
+    c := web.Startup(midware.SwggerWrapper(func(engine *gin.Engine) {
+        {{.Value.PrivatePkg}}.Register{{upper_first .Value.PrivatePkg}}Hanlder(engine)
+    }))
+    web.HandlerSignal(c)
+}
+
+

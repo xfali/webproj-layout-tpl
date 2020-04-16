@@ -1,0 +1,34 @@
+{{.Value.FileComment}}package {{.Value.PrivatePkg}}
+
+import "github.com/gin-gonic/gin"
+
+func Register{{upper_first .Value.PrivatePkg}}Hanlder(engine *gin.Engine) {
+    o := &{{upper_first .Value.PrivatePkg}}Handler{}
+    engine.GET("/{{lower_first .Value.PrivatePkg}}", o.Get{{upper_first .Value.PrivatePkg}})
+    engine.GET("/{{lower_first .Value.PrivatePkg}}/:id", o.Get{{upper_first .Value.PrivatePkg}}ById)
+    engine.POST("/{{lower_first .Value.PrivatePkg}}", o.Create{{upper_first .Value.PrivatePkg}})
+    engine.PUT("/{{lower_first .Value.PrivatePkg}}", o.Update{{upper_first .Value.PrivatePkg}})
+    engine.DELETE("/{{lower_first .Value.PrivatePkg}}/:id", o.Delete{{upper_first .Value.PrivatePkg}})
+}
+
+type {{upper_first .Value.PrivatePkg}}Handler struct{}
+
+func (o *{{upper_first .Value.PrivatePkg}}Handler) Get{{upper_first .Value.PrivatePkg}}(ctx *gin.Context) {
+
+}
+
+func (o *{{upper_first .Value.PrivatePkg}}Handler) Get{{upper_first .Value.PrivatePkg}}ById(ctx *gin.Context) {
+    ctx.Param("id")
+}
+
+func (o *{{upper_first .Value.PrivatePkg}}Handler) Create{{upper_first .Value.PrivatePkg}}(ctx *gin.Context) {
+
+}
+
+func (o *{{upper_first .Value.PrivatePkg}}Handler) Update{{upper_first .Value.PrivatePkg}}(ctx *gin.Context) {
+
+}
+
+func (o *{{upper_first .Value.PrivatePkg}}Handler) Delete{{upper_first .Value.PrivatePkg}}(ctx *gin.Context) {
+    ctx.Param("id")
+}

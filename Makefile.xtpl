@@ -1,0 +1,20 @@
+export GO111MODULE=on
+
+build: {{.Value.PublicApp}}
+.PHONY: build
+
+clean:
+.PHONY: clean
+
+test:
+.PHONY: test
+
+{{.Value.PublicApp}}: FORCE
+    go build -o $@ ./cmd/{{.Value.PublicApp}}
+
+vendor: go.mod go.sum
+    go mod vendor
+
+install:
+    go install -o {{.Value.PublicApp}} ./cmd/{{.Value.PublicApp}}
+.PHONY: install
